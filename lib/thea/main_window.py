@@ -190,15 +190,12 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             self.set_enabled)
         self.colorbar_dialog.fixed_colorbar.clicked.connect(
             self.state_changed_fix_colorbar)
-        self.colorbar_dialog.min_contour.valueChanged.connect(
-            self.set_enabled)
-        self.colorbar_dialog.max_contour.valueChanged.connect(
-            self.set_enabled)
         self.colorbar_dialog.autoselect_range.stateChanged.connect(
             self.update_max_min)
         self.colorbar_dialog.fixed_colorbar.clicked.connect(
             self.update_max_min)
         self.colorbar_dialog.manual_range.clicked.connect(self.update_max_min)
+        self.colorbar_dialog.ok_button.clicked.connect(self.ok_button_clicked)
 
         self.cube_info_tab.currentChanged.connect(self.show_data)
 
@@ -421,6 +418,14 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             self.colorbar_dialog.set_max_min(colorbar_max, colorbar_min)
 
         QApplication.restoreOverrideCursor()
+        
+    def ok_button_clicked(self):
+        _, _, valid_numbers = self.colorbar_dialog.get_max_min()
+        
+        if valid_numbers:
+            self.set_enabled()
+            self.colorbar_dialog.close()
+            self.update()
 
     def set_initial_index(self):
         """
@@ -871,8 +876,8 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
                                               collapsed_indices)
                     self.fixed_colorbar = True
             else:
-                self.colorbar_max = self.colorbar_dialog.max_contour.value()
-                self.colorbar_min = self.colorbar_dialog.min_contour.value()
+                self.colorbar_max, self.colorbar_min, _ = self.colorbar_dialog.get_max_min()
+            
             colorbar_range = {'max': self.colorbar_max,
                               'min': self.colorbar_min}
             slice_index = self.select_slice_scroll.value()

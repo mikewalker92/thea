@@ -57,19 +57,6 @@
      </property>
     </widget>
    </item>
-   <item row="6" column="2" colspan="2">
-    <widget class="QDoubleSpinBox" name="max_contour">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="minimum">
-      <double>-999999999.000000000000000</double>
-     </property>
-     <property name="maximum">
-      <double>999999999.000000000000000</double>
-     </property>
-    </widget>
-   </item>
    <item row="6" column="1">
     <widget class="QLabel" name="label">
      <property name="text">
@@ -85,69 +72,21 @@
     </widget>
    </item>
    <item row="5" column="2" colspan="2">
-    <widget class="QDoubleSpinBox" name="min_contour">
+    <widget class="QLineEdit" name="min_contour">
      <property name="enabled">
       <bool>false</bool>
      </property>
-     <property name="minimum">
-      <double>-999999999.000000000000000</double>
-     </property>
-     <property name="maximum">
-      <double>999999999.000000000000000</double>
+    </widget>
+   </item>
+   <item row="6" column="2" colspan="2">
+    <widget class="QLineEdit" name="max_contour">
+     <property name="enabled">
+      <bool>false</bool>
      </property>
     </widget>
    </item>
   </layout>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>manual_range</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>max_contour</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>83</x>
-     <y>139</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>240</x>
-     <y>82</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>manual_range</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>min_contour</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>83</x>
-     <y>139</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>120</x>
-     <y>82</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>ok_button</sender>
-   <signal>clicked()</signal>
-   <receiver>ColorbarDialog</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>208</x>
-     <y>162</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>208</x>
-     <y>99</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

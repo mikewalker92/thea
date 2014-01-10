@@ -73,6 +73,8 @@ class ColorbarOptions(QtGui.QDialog, Ui_ColorbarDialog):
         """
         # If the checkbox originally unchecked (and so is now checked), then we
         # let it be checked, and ensure that the others are not
+        self.max_contour.setEnabled(False)
+        self.min_contour.setEnabled(False)
         if self.autoselect_range.isChecked():
             self.fixed_colorbar.setChecked(False)
             self.manual_range.setChecked(False)
@@ -86,6 +88,8 @@ class ColorbarOptions(QtGui.QDialog, Ui_ColorbarDialog):
         This method defines what occurs when fixed_colorbar is clicked.
 
         """
+        self.max_contour.setEnabled(False)
+        self.min_contour.setEnabled(False)
         if self.fixed_colorbar.isChecked():
             self.autoselect_range.setChecked(False)
             self.manual_range.setChecked(False)
@@ -100,18 +104,36 @@ class ColorbarOptions(QtGui.QDialog, Ui_ColorbarDialog):
         if self.manual_range.isChecked():
             self.autoselect_range.setChecked(False)
             self.fixed_colorbar.setChecked(False)
+            self.max_contour.setEnabled(True)
+            self.min_contour.setEnabled(True)
         else:
             self.autoselect_range.setChecked(True)
+            self.max_contour.setEnabled(False)
+            self.min_contour.setEnabled(False)
 
     def get_max_min(self):
         """
         Returns the values currently displayed for maximum and minimum.
 
         """
-        colorbar_max = self.max_contour.value()
-        colorbar_min = self.min_contour.value()
-
-        return colorbar_max, colorbar_min
+        valid_numbers = True
+        colorbar_max = self.max_contour.text()
+        colorbar_max = colorbar_max.replace(' ','')
+        try:
+            colorbar_max = float(colorbar_max)
+        except ValueError:
+            self.max_contour.setText('Not a number')
+            valid_numbers = False
+            
+        colorbar_min = self.min_contour.text()
+        colorbar_min = colorbar_min.replace(' ','')
+        try:
+            colorbar_min = float(colorbar_min)
+        except ValueError:
+            self.min_contour.setText('Not a number')
+            valid_numbers = False
+            
+        return colorbar_max, colorbar_min, valid_numbers
 
     def get_colorbar_scheme(self):
         """
@@ -130,8 +152,8 @@ class ColorbarOptions(QtGui.QDialog, Ui_ColorbarDialog):
         Allows for the remote setting of the value of the colorbar.
         """
         if colorbar_max is not None and colorbar_min is not None:
-            self.max_contour.setValue(colorbar_max)
-            self.min_contour.setValue(colorbar_min)
+            self.max_contour.setText(str(colorbar_max))
+            self.min_contour.setText(str(colorbar_min))
 
     def disable_fixed_colorbar(self, ndim):
         """
