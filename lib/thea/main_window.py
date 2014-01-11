@@ -58,7 +58,6 @@ import thea.source_code_generator as source_code_generator
 import thea.table_model as table_model
 
 
-
 class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
     """
     This class handles all of the direct interactions with the GUI itself. It
@@ -409,7 +408,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
                            'sliced dim index': sliced_dim_index}
             collapsed_indices = []
             for i in xrange(self.ndim - 3):
-                box_name = "select_slice_index_" + str(i+1)
+                box_name = "select_slice_index_" + str(i + 1)
                 box = self.findChild(QtGui.QComboBox, box_name)
                 collapsed_indices.append(box.currentIndex())
 
@@ -418,14 +417,12 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             self.colorbar_dialog.set_max_min(colorbar_max, colorbar_min)
 
         QApplication.restoreOverrideCursor()
-        
+
     def ok_button_clicked(self):
         _, _, valid_numbers = self.colorbar_dialog.get_max_min()
-        
+
         if valid_numbers:
-            self.set_enabled()
             self.colorbar_dialog.close()
-            self.update()
 
     def set_initial_index(self):
         """
@@ -502,7 +499,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 
         """
         i = self.select_slice_combo.currentIndex()
-        self.select_slice_combo.setCurrentIndex(i+1)
+        self.select_slice_combo.setCurrentIndex(i + 1)
         self.update()
 
     def previous_slice(self):
@@ -513,7 +510,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         i = self.select_slice_combo.currentIndex()
         if i == 0:
             i = self.select_slice_combo.count()
-        self.select_slice_combo.setCurrentIndex(i-1)
+        self.select_slice_combo.setCurrentIndex(i - 1)
         self.update()
 
     def arrange_coords_1(self):
@@ -613,8 +610,8 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             unused_dims = gl.get_remaining_dims(self.dim_names, used_dims)
 
             for i in xrange(len(unused_dims)):
-                label_name = "collapsed_dim_" + str(i+1)
-                box_name = "select_slice_index_" + str(i+1)
+                label_name = "collapsed_dim_" + str(i + 1)
+                box_name = "select_slice_index_" + str(i + 1)
 
                 label = self.findChild(QtGui.QLabel, label_name)
                 label.setText(unused_dims[i])
@@ -859,7 +856,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
                            'sliced dim index': sliced_dim_index}
             collapsed_indices = []
             for dim in xrange(cube.ndim - 3):
-                box_name = "select_slice_index_" + str(dim+1)
+                box_name = "select_slice_index_" + str(dim + 1)
                 box = self.findChild(QtGui.QComboBox, box_name)
                 collapsed_indices.append(box.currentIndex())
             can_draw_map = self.can_draw_map
@@ -876,8 +873,9 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
                                               collapsed_indices)
                     self.fixed_colorbar = True
             else:
-                self.colorbar_max, self.colorbar_min, _ = self.colorbar_dialog.get_max_min()
-            
+                self.colorbar_max, self.colorbar_min, _ = \
+                    self.colorbar_dialog.get_max_min()
+
             colorbar_range = {'max': self.colorbar_max,
                               'min': self.colorbar_min}
             slice_index = self.select_slice_scroll.value()

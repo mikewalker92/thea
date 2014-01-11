@@ -118,21 +118,21 @@ class ColorbarOptions(QtGui.QDialog, Ui_ColorbarDialog):
         """
         valid_numbers = True
         colorbar_max = self.max_contour.text()
-        colorbar_max = colorbar_max.replace(' ','')
+        colorbar_max = colorbar_max.replace(' ', '')
         try:
             colorbar_max = float(colorbar_max)
         except ValueError:
             self.max_contour.setText('Not a number')
             valid_numbers = False
-            
+
         colorbar_min = self.min_contour.text()
-        colorbar_min = colorbar_min.replace(' ','')
+        colorbar_min = colorbar_min.replace(' ', '')
         try:
             colorbar_min = float(colorbar_min)
         except ValueError:
             self.min_contour.setText('Not a number')
             valid_numbers = False
-            
+
         return colorbar_max, colorbar_min, valid_numbers
 
     def get_colorbar_scheme(self):
