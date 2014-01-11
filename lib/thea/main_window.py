@@ -638,7 +638,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             label_name = "collapsed_dims"
             label = QtGui.QLabel(self.dim_options_frame)
             label.setText('Collapsed Dims:')
-            self.gridLayout_9.addWidget(label, (11), 0, 1, 2)
+            self.gridLayout_9.addWidget(label, (14), 0, 1, 2)
             label.setObjectName(label_name)
 
         label_name = "collapsed_dim_" + str(num)
@@ -647,8 +647,8 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         label = QtGui.QLabel(self.dim_options_frame)
         box = QtGui.QComboBox(self.dim_options_frame)
 
-        self.gridLayout_9.addWidget(label, (11 + num), 0, 1, 1)
-        self.gridLayout_9.addWidget(box, (11 + num), 1, 1, 1)
+        self.gridLayout_9.addWidget(label, (14 + num), 0, 1, 1)
+        self.gridLayout_9.addWidget(box, (14 + num), 1, 1, 1)
 
         label.setObjectName(label_name)
         box.setObjectName(box_name)
