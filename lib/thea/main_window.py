@@ -423,6 +423,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 
         if valid_numbers:
             self.colorbar_dialog.close()
+            self.set_enabled()
 
     def set_initial_index(self):
         """
